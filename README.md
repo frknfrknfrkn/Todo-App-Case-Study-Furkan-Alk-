@@ -90,7 +90,7 @@ cd (backend dosyası)
 composer install  # eğer composer varsa
 
 Frontend>
-cd (frontend dosyası)
+cd todo-admin-panel
 npm install
 npm run dev
 
