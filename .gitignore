@@ -1,0 +1,29 @@
+# === GLOBAL ===
+.DS_Store
+Thumbs.db
+.env
+.env.local
+*.log
+*.bak
+
+# === NODE ===
+node_modules/
+build/
+dist/
+
+# === REACT ===
+/frontend/node_modules
+/frontend/.env
+/frontend/.next
+/frontend/dist
+/frontend/build
+
+# === PHP ===
+/vendor/
+/backend/vendor
+/backend/.env
+
+# === OS/IDE KLASÖRLERİ ===
+.vscode/
+.idea/
+*.swp
