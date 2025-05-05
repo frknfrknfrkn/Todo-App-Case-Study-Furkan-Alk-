@@ -82,7 +82,7 @@ DELETE /api/categories/{id}
 Kurulum
 
 MySQL'de veritabanı oluştur
-config/db.php içindeki bağlantı bilgilerini düzenle
+config/config.php içindeki bağlantı bilgilerini düzenle
 Klasördeki todouygulamasıdb.sql'i veritabanı içine aktar.
 
 backend>
