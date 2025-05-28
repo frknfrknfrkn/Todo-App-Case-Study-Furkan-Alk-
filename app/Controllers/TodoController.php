@@ -15,21 +15,34 @@ class TodoController {
         header('Content-Type: application/json');
     }
 
-    public function index() {
-        $params = $_GET;
-        $data = $this->todo->filtered($params);
-    
-        // eger sonuc false ise bos dondur
-        if (!is_array($data)) {
-            $data = [];
-        }
-    
-        foreach ($data as &$todo) {
-            $todo['categories'] = $this->todoCategory->getCategoriesByTodoId($todo['id']);
-        }
-    
-        echo json_encode($data);
-    }    
+public function index() {
+    $params = $_GET;
+
+    $page = max((int)($params['page'] ?? 1), 1);
+    $limit = min(max((int)($params['limit'] ?? 10), 1), 100);
+    $offset = ($page - 1) * $limit;
+
+    $total = $this->todo->countFiltered($params);
+    $totalPages = ceil($total / $limit);
+
+    $data = $this->todo->filtered($params); // zaten limit/offset dahil
+
+    if (!is_array($data)) {
+        $data = [];
+    }
+
+    foreach ($data as &$todo) {
+        $todo['categories'] = $this->todoCategory->getCategoriesByTodoId($todo['id']);
+    }
+
+    echo json_encode([
+        'page' => $page,
+        'limit' => $limit,
+        'total' => $total,
+        'total_pages' => $totalPages,
+        'data' => $data
+    ]);
+}
 
     public function show($id) {
         $todo = $this->todo->find($id);
